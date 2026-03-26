@@ -1,18 +1,19 @@
-import type { ProductType } from "../../data/products";
+import type { ProductType } from '../../data/products'
+import styles from './Product.module.scss'
 
-const formatPrice = (price: number) => 
-  new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }).format(price);
+const formatPrice = (price: number) =>
+  new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(price)
 
 type ProductProps = {
-    item: ProductType
+  item: ProductType
 }
 
 const Product = ({ item }: ProductProps) => (
-    <li>
-        <h2>{ item.name }</h2>
-        <p>{ item.description }</p>
-        <div className='price'>{ formatPrice(item.price) }</div>
-    </li>
+  <li className={styles.product}>
+    <h2 className={styles.name}>{item.name}</h2>
+    <p className={styles.description}>{item.description}</p>
+    <div className={styles.price}>{formatPrice(item.price)}</div>
+  </li>
 )
 
 export { Product as default, Product, type ProductProps }

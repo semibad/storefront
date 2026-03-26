@@ -4,8 +4,24 @@
   box-sizing: border-box;
 }
 
+:root {
+  --content-width: 64rem;
+  --content-padding: 2.5rem;
+
+  --bg: #0a0a0a;
+  --surface: #141414;
+  --surface-raised: #1c1c1c;
+  --border: #252525;
+  --text: #f2f2f2;
+  --text-muted: #666;
+  --accent: #fbbf24;
+  --accent-dim: rgba(251, 191, 36, 0.12);
+}
+
 body {
   margin: 0;
-  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
   -webkit-font-smoothing: antialiased;
 }

@@ -8,10 +8,12 @@ export function App() {
   return (
     <div className={styles.app}>
       <Header />
-      <main className={styles.main}>
-        <ul>
-          { products.map((item) => <Product item={item} />)}
-        </ul>
+      <main>
+        <div className={styles.inner}>
+          <ul className={styles.productList}>
+            {products.map((item) => <Product key={item.name} item={item} />)}
+          </ul>
+        </div>
       </main>
     </div>
   )
