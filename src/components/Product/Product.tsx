@@ -16,4 +16,4 @@ const Product = ({ item }: ProductProps) => (
   </li>
 )
 
-export { Product as default, Product, type ProductProps }
+export { Product, type ProductProps }
