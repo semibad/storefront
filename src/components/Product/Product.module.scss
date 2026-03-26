@@ -30,9 +30,18 @@
   line-height: 1.5;
 }
 
-.price {
-  display: inline-block;
+.priceAndControls {
   margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.count {
+  display: flex;
+}
+
+.price, .count button, .countLabel {
+  display: block;
   padding: 0.375rem 0.75rem;
   font-size: 1.125rem;
   font-weight: 700;
@@ -41,3 +50,5 @@
   border-radius: 4px;
   align-self: flex-start;
 }
+
+.count button { border: none; }
