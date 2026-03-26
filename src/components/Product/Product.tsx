@@ -1,4 +1,4 @@
-import type { ProductType } from '../../data/products'
+import type { ProductType } from '@data/products'
 import styles from './Product.module.scss'
 
 const formatPrice = (price: number) =>

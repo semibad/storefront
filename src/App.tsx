@@ -1,8 +1,7 @@
-import { Header } from './components/Header'
+import { Header } from '@components/Header'
+import Product from '@components/Product/Product'
+import products from '@data/products'
 import styles from './App.module.scss'
-
-import products from './data/products'
-import Product from './components/Product/Product'
 
 export function App() {
   return (

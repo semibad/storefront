@@ -1,8 +1,16 @@
 /// <reference types="vitest/config" />
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { resolve } from 'node:path'
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@components': resolve(__dirname, 'src/components'),
+      '@data': resolve(__dirname, 'src/data'),
+      '@styles': resolve(__dirname, 'src/styles'),
+    },
+  },
   plugins: [react()],
   css: {
     modules: {
