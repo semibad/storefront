@@ -30,7 +30,7 @@ The app will be available at `http://localhost:5173`.
 
 Coverage output is written to `coverage/` — open `coverage/index.html` for the full HTML report.
 
-![Current coverage](./coverage.png)
+![Current coverage](coverage.png)
 
 ## Project structure
 
