@@ -50,8 +50,6 @@ src/
   main.tsx
 ```
 
-Path aliases: `@components`, `@data`, `@styles`, `@hooks`, `@utils`.
-
 ## Notes
 
 - Running the product data and the state through the useCart hook works nicely and reads well for a very small consistent data set as in the requirements – I don’t think it would scale very well as is
