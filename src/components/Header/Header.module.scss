@@ -28,6 +28,9 @@
 }
 
 .cartButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.5rem 1rem;
   background-color: var(--accent-dim);
   border: 1px solid var(--accent);
@@ -35,8 +38,11 @@
   color: var(--accent);
   font-size: 1rem;
   font-weight: 700;
+  font-family: inherit;
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease;
+
+  svg { flex-shrink: 0; }
 
   &:hover {
     background-color: var(--accent);
