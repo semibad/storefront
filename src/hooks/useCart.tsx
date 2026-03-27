@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import products, { type ProductType } from "@data/products";
 
 // types
@@ -28,18 +28,40 @@ const emptyCount = (cart: CartItem[], setCart: (arg1: CartItem[]) => void, id: n
      const currentIndex = cart.findIndex(item => item.id === id);
      const newItem = { id, count: 0 };
      setCart(currentIndex >= 0 ? cart.with(currentIndex, newItem) : [...cart, newItem])
+}
 
+// persistence
+const STORAGE_KEY = 'storefront-cart-storage'
+// not sure i love this for a more complete implementation but keeps things simple at this scale
+const defaultState: CartItem[] = products.map(({ id }) => ({ id, count: 0 }))
+
+const lazyInitWithLoad = (): CartItem[] => {
+    try {
+        const stored = localStorage.getItem(STORAGE_KEY)
+        if (!stored) return defaultState
+        const parsed: unknown = JSON.parse(stored)
+        // for a more complete implementation i would verify more thoroughly against the product data
+        if (!Array.isArray(parsed)) return defaultState
+        return parsed as CartItem[]
+    } catch {
+        return defaultState
+    }
 }
 
 // hook
-const initialState: CartItem[] = products.map(({id}) => ({ id, count: 0 }));
-
 const useCart = () => {
-    const [cart, setCart] = useState<CartItem[]>(initialState);
+    const [cart, setCart] = useState<CartItem[]>(lazyInitWithLoad);
 
+    useEffect(() => {
+        // store our state every time it'se changed
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(cart))
+    }, [cart])
+
+    // generating counts / totals whenever the state changes, and attaching everything we need
+    // to display or update the cart state so we don't get lots of logic in our renders
     const augmentedProducts: AugmentedProductType[] = products.map(product => {
         const count = cart.find(item => item.id === product.id)?.count || 0;
-            return { 
+            return {
                 ...product,
                 count,
                 subtotal: count * product.price,
@@ -49,6 +71,7 @@ const useCart = () => {
             }
         })
 
+    // sum everything for the header button, only when the state changes
     const total = augmentedProducts.reduce((val, item) => val + item.subtotal, 0);
 
     return { cart, products: augmentedProducts, total };
