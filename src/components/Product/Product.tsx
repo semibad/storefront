@@ -13,6 +13,7 @@ const PriceAndControls = ({ item }: ProductProps) => (
       <button onClick={item.decrement}>-</button>
       <span className={styles.countLabel}>{ item.count } in basket</span>
       <button onClick={item.increment}>+</button>
+      <button onClick={item.empty}>×</button>
     </div>
   </div>
 

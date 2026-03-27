@@ -11,16 +11,24 @@ export type AugmentedProductType = ProductType & {
     count: number,
     subtotal: number,
     increment: () => void,
-    decrement: () => void
+    decrement: () => void,
+    empty: () => void
 }
 
 // manipulation
-const modifyValue = (cart: CartItem[], setCart: (arg1: CartItem[]) => void, mod: number, id: number) => () => {
+const modifyCount = (cart: CartItem[], setCart: (arg1: CartItem[]) => void, id: number, mod: number) => () => {
     const currentIndex = cart.findIndex(item => item.id === id);
     const currentCount = cart[currentIndex]?.count || 0;
     const newCount = Math.max(currentCount + mod, 0);
     const newItem = { id, count: newCount }
     setCart(currentIndex >= 0 ? cart.with(currentIndex, newItem) : [...cart, newItem])
+}
+
+const emptyCount = (cart: CartItem[], setCart: (arg1: CartItem[]) => void, id: number) => () => {
+     const currentIndex = cart.findIndex(item => item.id === id);
+     const newItem = { id, count: 0 };
+     setCart(currentIndex >= 0 ? cart.with(currentIndex, newItem) : [...cart, newItem])
+
 }
 
 // hook
@@ -35,8 +43,9 @@ const useCart = () => {
                 ...product,
                 count,
                 subtotal: count * product.price,
-                increment: modifyValue(cart, setCart, 1, product.id),
-                decrement: modifyValue(cart, setCart, -1, product.id),
+                increment: modifyCount(cart, setCart, product.id, 1),
+                decrement: modifyCount(cart, setCart, product.id, -1),
+                empty: emptyCount(cart, setCart, product.id),
             }
         })
 

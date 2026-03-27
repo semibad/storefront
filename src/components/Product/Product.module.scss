@@ -33,22 +33,49 @@
 .priceAndControls {
   margin-top: 0.5rem;
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  gap: 1rem;
 }
 
-.count {
-  display: flex;
-}
-
-.price, .count button, .countLabel {
-  display: block;
+.price {
   padding: 0.375rem 0.75rem;
   font-size: 1.125rem;
   font-weight: 700;
   color: var(--accent);
   background-color: var(--accent-dim);
   border-radius: 4px;
-  align-self: flex-start;
 }
 
-.count button { border: none; }
+.count {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.count button {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font-size: 1.125rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+.countLabel {
+  min-width: 6rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
