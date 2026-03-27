@@ -16,15 +16,15 @@ export type AugmentedProductType = ProductType & {
 }
 
 // manipulation
-const modifyCount = (cart: CartItem[], setCart: (arg1: CartItem[]) => void, id: number, mod: number) => () => {
+export const modifyCount = (cart: CartItem[], setCart: (arg1: CartItem[]) => void, id: number, mod: number) => () => {
     const currentIndex = cart.findIndex(item => item.id === id);
     const currentCount = cart[currentIndex]?.count || 0;
     const newCount = Math.max(currentCount + mod, 0);
-    const newItem = { id, count: newCount }
+    const newItem = { id, count: newCount };
     setCart(currentIndex >= 0 ? cart.with(currentIndex, newItem) : [...cart, newItem])
 }
 
-const emptyCount = (cart: CartItem[], setCart: (arg1: CartItem[]) => void, id: number) => () => {
+export const emptyCount = (cart: CartItem[], setCart: (arg1: CartItem[]) => void, id: number) => () => {
      const currentIndex = cart.findIndex(item => item.id === id);
      const newItem = { id, count: 0 };
      setCart(currentIndex >= 0 ? cart.with(currentIndex, newItem) : [...cart, newItem])
