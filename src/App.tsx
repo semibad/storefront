@@ -8,7 +8,7 @@ export const App = () => {
   
   return (
     <div className={styles.app}>
-      <Header total={total} />
+      <Header total={total} products={products} />
       <main>
         <div className={styles.inner}>
           <ul className={styles.productList}>
