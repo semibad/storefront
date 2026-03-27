@@ -9,6 +9,7 @@ export default defineConfig({
       '@components': resolve(__dirname, 'src/components'),
       '@data': resolve(__dirname, 'src/data'),
       '@styles': resolve(__dirname, 'src/styles'),
+      '@utils': resolve(__dirname, 'src/utils.ts'),
     },
   },
   plugins: [react()],

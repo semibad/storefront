@@ -4,16 +4,15 @@ import styles from './App.module.scss'
 import useCart from './hooks/useCart'
 
 export const App = () => {
-  const { augmentedProducts } = useCart();
-
-
+  const { products, total } = useCart();
+  
   return (
     <div className={styles.app}>
-      <Header />
+      <Header total={total} />
       <main>
         <div className={styles.inner}>
           <ul className={styles.productList}>
-            {augmentedProducts.map((item) => <Product key={item.id} item={item} />)}
+            {products.map((item) => <Product key={item.id} item={item} />)}
           </ul>
         </div>
       </main>

@@ -9,6 +9,7 @@ type CartItem = {
 
 export type AugmentedProductType = ProductType & {
     count: number,
+    subtotal: number,
     increment: () => void,
     decrement: () => void
 }
@@ -28,14 +29,20 @@ const initialState: CartItem[] = products.map(({id}) => ({ id, count: 0 }));
 const useCart = () => {
     const [cart, setCart] = useState<CartItem[]>(initialState);
 
-    const augmentedProducts: AugmentedProductType[] = products.map(product => ({ 
-        ...product,
-        count: cart.find(item => item.id === product.id)?.count || 0,
-        increment: modifyValue(cart, setCart, 1, product.id),
-        decrement: modifyValue(cart, setCart, -1, product.id),
-    }))
+    const augmentedProducts: AugmentedProductType[] = products.map(product => {
+        const count = cart.find(item => item.id === product.id)?.count || 0;
+            return { 
+                ...product,
+                count,
+                subtotal: count * product.price,
+                increment: modifyValue(cart, setCart, 1, product.id),
+                decrement: modifyValue(cart, setCart, -1, product.id),
+            }
+        })
 
-    return { cart, augmentedProducts };
+    const total = augmentedProducts.reduce((val, item) => val + item.subtotal, 0);
+
+    return { cart, products: augmentedProducts, total };
 }
 
 export { useCart as default };

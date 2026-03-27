@@ -1,8 +1,6 @@
 import styles from './Product.module.scss'
-import type { AugmentedProductType } from 'src/hooks/useCart'
-
-const formatPrice = (price: number) =>
-  new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(price)
+import { formatPrice } from '@utils'
+import type { AugmentedProductType } from '@hooks/useCart'
 
 type ProductProps = {
   item: AugmentedProductType
